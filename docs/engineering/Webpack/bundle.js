@@ -1,0 +1,1 @@
+console.log("load"),console.log("调用来自文件:","/Users/xy/XY/github_study/Study_Node/Webpack/src/index.js"),console.log("toPrint");
