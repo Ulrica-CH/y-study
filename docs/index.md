@@ -3,19 +3,22 @@
 layout: home
 
 hero:
-  name: "个人前端学习笔记"
-  # text: "XY的前端学习记录"
-  tagline: 涵盖JS、TS、Vue3、构建工具、数据结构算法、手写实现等完整学习路径
-  # actions:
-  #   - theme: brand
-  #     text: 开始学习
-  #     link: /javascript/
-  #   - theme: alt
-  #     text: 数据结构算法
-  #     link: /data-structures/
-  #   - theme: alt
-  #     text: 手写实现
-  #     link: /handwritten/
+  name: "MichstaBe"
+  text: "XY的成长之路"
+  tagline: 不积跬步无以至千里，不积小流无以成江海。
+  # image:
+  #   src: /logo.jpeg
+  #   alt: MichstaBe
+  actions:
+    - theme: brand
+      text: 开始学习
+      link: /javascript/
+    - theme: alt
+      text: 数据结构算法
+      link: /data-structures/
+    - theme: alt
+      text: 手写实现
+      link: /handwritten/
 
 features:
   - title: 🎯 浏览器原理
@@ -53,3 +56,6 @@ features:
 - **具备工程化思维**：从项目搭建到部署优化的全流程能力
 
 --- -->
+
+<HomeUnderline />
+<confetti />

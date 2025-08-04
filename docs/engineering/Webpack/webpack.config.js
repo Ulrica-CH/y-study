@@ -1,11 +1,15 @@
 const path = require("path");
+const MyPlugin = require("./plugin/MyPlugin");
 module.exports = {
   entry: "./src/index.js",
   mode:'production',   
   output: {
     path: __dirname,
-    filename: "bundle.js",
+    filename: "bundle.js",  
   },
+  plugins: [
+    new MyPlugin(),
+  ],
   module: {
     rules: [
       {
