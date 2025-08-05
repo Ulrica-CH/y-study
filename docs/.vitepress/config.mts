@@ -38,7 +38,6 @@ export default defineConfig({
       {
         text: "前端进阶",
         items: [
-
           { text: "正则表达式", link: "/front-advanced/javascript/regex" },
           { text: "JavaScript高级", link: "/front-advanced/javascript/index" },
           { text: "TypeScript", link: "/front-advanced/typescript/index" },
@@ -58,7 +57,20 @@ export default defineConfig({
           { text: "微内核架构", link: "/engineering/micro-kernel/index" },
           { text: "Monorepo模式", link: "/engineering/monorepo/index" },
           { text: "Babel编译", link: "/engineering/micro-kernel/index" },
-          { text: "NodeJS", link: "/engineering/node/index" },
+          {
+            text: "NodeJS",
+            link: "/engineering/node/index",
+            // items: [
+            //   { text: "进程", link: "/engineering/node/process/index" },
+            //   { text: "事件循环", link: "/engineering/node/event-loop/index" },
+            //   { text: "模块化", link: "/engineering/node/modules/index" },
+            //   { text: "Buffer", link: "/engineering/node/buffer/index" },
+            //   { text: "Stream", link: "/engineering/node/stream/index" },
+            //   { text: "文件系统", link: "/engineering/node/file-system/index" },
+            //   { text: "网络编程", link: "/engineering/node/network/index" },
+            //   { text: "异步编程", link: "/engineering/node/async/index" },
+            // ],
+          },
           { text: "包管理工具", link: "/engineering/package-managers/index" },
           { text: "构建工具", link: "/engineering/build-tools/index" },
           { text: "性能优化", link: "/engineering/performance/index" },
@@ -72,8 +84,8 @@ export default defineConfig({
       {
         text: "开发记录",
         items: [
-          { text: "踩坑记录", link: "/project-record/index" },
-          { text: "项目记录", link: "/project-record/project-record/index" },
+          { text: "踩坑记录", link: "/record/project-record/index" },
+          { text: "项目记录", link: "/record/project-record/index" },
         ],
       },
       {
@@ -183,7 +195,6 @@ export default defineConfig({
           text: "JavaScript原理",
           collapsed: false,
           items: [
-           
             {
               text: "执行上下文",
               link: "/front-advanced/javascript/execution-context",
@@ -404,11 +415,36 @@ export default defineConfig({
         { text: "微内核架构", link: "/engineering/micro-kernel" },
         { text: "Monorepo模式", link: "/engineering/monorepo" },
         { text: "Babel编译", link: "/engineering/babel" },
-        { text: "NodeJS", link: "/engineering/node" },
-        { text: "包管理工具", link: "/engineering/package-managers" },
+        {
+          text: "NodeJS",
+          link: "/engineering/node/index",
+          collapsed: false,
+          items: [
+            { text: "进程", link: "/engineering/node/process/index" },
+            { text: "事件循环", link: "/engineering/node/event-loop/index" },
+            { text: "模块化", link: "/engineering/node/modules/index" },
+            { text: "Buffer", link: "/engineering/node/buffer/index" },
+          ],
+        },
+        {
+          text: "包管理工具",
+          // link: "/engineering/package-managers",
+          collapsed: false,
+          items: [
+            { text: "npm", link: "/engineering/package-managers/npm/index" },
+            { text: "yarn", link: "/engineering/package-managers/yarn/index" },
+            { text: "pnpm", link: "/engineering/package-managers/pnpm/index" },
+          ],
+        },
         { text: "构建工具", link: "/engineering/build-tools" },
         { text: "性能优化", link: "/engineering/performance" },
         { text: "微前端", link: "/engineering/micro-frontend" },
+        {
+          text: "AI相关",
+          link: "/engineering/ai",
+          collapsed: false, 
+          items: [{ text: "MCP", link: "/engineering/ai/mcp/index" }],
+        },
       ],
       "/computer-related/browser/": [
         {
@@ -464,19 +500,38 @@ export default defineConfig({
           items: [{ text: "Docker基础", link: "/ci-cd/docker" }],
         },
       ],
-      "/project-record/": [
-        {
-          text: "项目记录",
-          items: [{ text: "项目记录", link: "/project-record/index" }],
-        },
-      ],
-      "/command/": [
+     
+      "/summary/": [
         {
           text: "常用命令",
+          collapsed: false,
           items: [
-            { text: "查询网站", link: "/command/website/index" },
-            { text: "远程部署", link: "/command/remote-deployment/index" },
+            { text: "Node常用命令", link: "/summary/command/node/index" },
+            { text: "Git常用命令", link: "/summary/command/git/index" },
+            { text: "Docker常用命令", link: "/summary/command/docker/index" },
+            { text: "Linux常用命令", link: "/summary/command/linux/index" },
+        
+
           ],
+        },
+        { text: "查询网站", link: "/summary/website/index" },
+        { text: "远程部署", link: "/summary/command/remote-deployment/index" },
+      ],
+      "/record/": [
+        {
+          text: "项目记录",
+          collapsed: false,
+          link: "/record/project-record/index",
+          items: [
+            { text: "组件封装", link: "/record/project-record/components/index" },
+            { text: "业务组件集成", link: "/record/project-record/business-components/index" },
+          ],
+        },
+        {
+          text: "踩坑记录",
+          collapsed: false,
+          link: "/record/project-record/index",
+          items: [{ text: "组件封装", link: "/record/project-record/components/index" }],
         },
       ],
     },
