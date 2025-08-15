@@ -1,5 +1,181 @@
 # NPM
 
+## npm 脚本传参
+
+### 直接 ndoe index.js
+
+```bash
+node test.js -x -r -n5 aaa bbb ccc -abc bn -mu -bnbn -io -i8o9
+```
+
+- 直接使用 process.argv
+
+```js
+	- [
+  '/Users/xy/.nvm/versions/node/v18.20.6/bin/node',
+  '/Users/xy/XY/study/s_parser/test.js',
+  '-x',
+  '-r',
+  '-n5',
+  'aaa',
+  'bbb',
+  'ccc',
+...
+]
+```
+
+- 使用 minimist
+  https://www.npmjs.com/package/minimist
+
+```js
+-{
+  _: ["aaa", "bbb", "ccc"],
+  x: true,
+  r: true,
+  n: [5, true, true],
+  a: true,
+  b: true,
+  c: "bn",
+  m: true,
+  u: true,
+  i: "8o9",
+  o: true,
+};
+```
+
+- 参数解析规则
+
+- 参数的位置并不固定，可以放在选项中间、选项之前
+
+- 布尔类型的短选项可以合并 -xy --> -x:true -y:true
+
+- 长选项不会合并
+
+- --xy ---> xy:true
+
+- 选项和选项值之间可以用等号也可以用空格隔开
+
+-x=1 --> x:1
+-y 2 --> y:2
+-n5 --> n:5 这样也可以
+
+- 如果有的选项你想作为参数，可以加上 --，-- 之后的所有内容都会作为参数
+
+-- -y 2 -aaa=m --后面无论怎么写，都会放到参数里
+
+- minimist 支持传递参数
+
+```js
+const argv = minimist(process.argv.slice(2), {
+    boolean: ['x'],
+    string: ['y']
+
+});
+```
+
+- 选项就有两种 string 和 boolean，可以在 boolean 和 string 选项显示声明
+
+- node ./index2.js -x 1 -y
+
+- x:true y:''
+
+x 虽然传入的选项值是 1 但被当做 boolean 解析为了 true
+
+- 指定哪些解析哪些不解析
+
+```js
+- unknown(arg) {
+  return arg === '-u'
+  }
+
+- node ./index2.js -x 1 -y -z dong
+
+node ./index2.js -x 1 -y -u dong
+
+- z 不会解析，u 会解析
+
+- 指定默认值
+
+default: { y: 2333 }
+
+- node ./index2.js -x 1
+
+- y:2333 也会解析出来
+
+- 制定别名 alias: { p: 'port', t: 'template' }
+
+- 缺点：只是解析参数，不能打印 help 信息、不支持解析命令自动执行对应函数，一切都要自己来做
+```
+
+- commander
+  https://www.npmjs.com/package/commander?activeTab=readme
+
+```js
+const { Command } = require("commander");
+
+const program = new Command();
+program
+  .name("string-util")
+  .description("一些字符串工具的 CLI")
+  .version("0.8.0");
+
+program
+  .command("split")
+  .description("分割字符串为字符数组")
+  .argument("<string>", "分割的字符串")
+  .option("--first", "只展示第一个子串")
+  .option("-s, --separator <char>", "分割字符", ",")
+  .action((str, options) => {
+    const limit = options.first ? 1 : undefined;
+    console.log(str.split(options.separator, limit));
+  });
+program.parse();
+```
+
+```
+- node comm.js split ak,d,cc -s ','
+
+[ 'ak', 'd', 'cc' ]
+
+- commander 是链式调用的风格，description 传入命令描述、argument 是参数、option 是选项。
+
+如果选项有别名、选项值，都是在 option 第一个参数里声明
+
+- node comm.js split -h
+
+Usage: string-util split [options] <string>
+
+分割字符串为字符数组
+
+Arguments: string 分割的字符串
+```
+
+```bash
+Options:
+--first 只展示第一个子串
+-s, --separator <char> 分割字符 (default: ",")
+-h, --help display help for commandOptions:
+--first 只展示第一个子串
+-s, --separator <char> 分割字符 (default: ",")
+-h, --help display help for command
+```
+
+- 尖括号代表必填、方括号代表可选。
+
+参数值、选项值，一般都用尖括号展示
+
+选项和子命令是可选的，用方括号展示
+
+## 通过 npm run start 等脚本
+
+### npm run start --mog=hello -x -r --xy 90 hj
+
+- --mog=hello 也是选项 给到 npm_config_mog=hello
+
+- 但如果是--msg=hello 会把 hello 放到参数里
+
+- -- 后面的都会放到参数
+
 ## install 原理
 
 npm 从 registry 仓库中下载包时，其实是下载一个压缩包，这个压缩包有对应的配置文件来记录压缩包的对应信息。
@@ -53,10 +229,12 @@ npm 从 registry 仓库中下载包时，其实是下载一个压缩包，这个
 3. **~x.y.z**：表示 x 和 y 保持不变的，z 永远安装最新的版本
 
 **区别：**
+
 - `^` 的弹性空间比 `~` 更大，但后者更为稳定
 - 从配置中存在的比例，可以预估一下对稳定性的需求有多高
 
 **注意事项：**
+
 - 主版本号为 0 的特殊情况，表示该软件仍在初始开发阶段，API 可能频繁发生变化且不稳定，最好不使用
 
 ## install 问题
